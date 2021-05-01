@@ -1,0 +1,189 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "3.0.0",
+    "title": "REST API, Shopify Fall 2021 Challenge",
+    "description": "Express API with MongoDB Atlas and JWT Authentication, and AWS S3 Bucket for Image Storage",
+    "license": {
+      "name": "MIT",
+      "url": "https://opensource.org/licenses/MIT"
+    }
+  },
+  "host": "localhost:3000/",
+  "basePath": "/",
+  "schemes": ["http"],
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
+  "paths": {
+    "/auth/signup": {
+      "post": {
+        "tags": [
+          "Authentication"
+        ],
+        "description": "Creates new user in MongoDB upon successful registration",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "body",
+            "description": "User email"
+          },
+          {
+            "name": "password",
+            "in": "body",
+            "description": "User password"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "201": {
+            "description": "User created successfully"
+          },
+          "400": {
+            "description": "User could not be created"
+          }
+        }
+      }
+    },
+    "/auth/login": {
+      "post": {
+        "tags": [
+          "Authentication"
+        ],
+        "description": "Logs user in and generates a valid 24-hour JWT upon success",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "body",
+            "description": "User email"
+          },
+          {
+            "name": "password",
+            "in": "body",
+            "description": "User password"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "JWT, Current User Document"
+          },
+          "400": {
+            "description": "Invalid Credentials"
+          }
+        }
+      }
+    },
+    "/images/newImage": {
+      "post": {
+        "tags": [
+          "Image CRUD"
+        ],
+        "description": "Uploads an image into a S3 Bucket, denoted by each User's unique ID",
+        "parameters": [
+          {
+            "name": "User ID",
+            "in": "body",
+            "description": "User's Unique ID"
+          },
+          {
+            "name": "Image",
+            "in": "body",
+            "description": "Image File User is Uploading"
+          },
+          {
+            "name": "JWT",
+            "in": "body",
+            "description": "Valid JWT to Authenticate Request"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "201": {
+            "description": "Image Uploaded Successfully"
+          },
+          "400": {
+            "description": "Image Could Not Be Uploaded"
+          }
+        }
+      }
+    },
+    "/images/getImage": {
+      "get": {
+        "tags": [
+          "Image CRUD"
+        ],
+        "description": "Gets any and all images uploaded or owned by the current user.",
+        "parameters": [
+          {
+            "name": "User ID",
+            "in": "body",
+            "description": "User's Unique ID"
+          },
+          {
+            "name": "JWT",
+            "in": "body",
+            "description": "Valid JWT to Authenticate Request"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Collection of User's Images"
+          },
+          "400": {
+            "description": "Images Could Not Be Retrieved"
+          }
+        }
+      }
+    },
+    "/images/deleteImage": {
+      "delete": {
+        "tags": [
+          "Image CRUD"
+        ],
+        "description": "Deletes an image, as specified by the user.",
+        "parameters": [
+          {
+            "name": "User ID",
+            "in": "body",
+            "description": "User's Unique ID"
+          },
+          {
+            "name": "Image ID",
+            "in": "body",
+            "description": "ID of Specific Image to be Deleted"
+          },
+          {
+            "name": "Image Key",
+            "in": "body",
+            "description": "Absolute File URL of Specific Image to Delete"
+          },
+          {
+            "name": "JWT",
+            "in": "body",
+            "description": "Valid JWT to Authenticate Request"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Image deleted successfully"
+          },
+          "400": {
+            "description": "Image could not be deleted"
+          }
+        }
+      }
+    }
+  }
+}
