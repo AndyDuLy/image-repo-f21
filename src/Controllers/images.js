@@ -3,7 +3,7 @@ const { v4: uuidv4 } = require('uuid');
 const fs = require('fs');
 var path = require('path')
 
-const User = require("../models/user");
+const User = require("../Models/user");
 const { uploadImage, deleteImage } = require('./s3');
 
 // POST Callback to Facilitate Image Upload and MongoDB Atlas Write
