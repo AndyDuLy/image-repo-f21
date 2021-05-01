@@ -15,6 +15,7 @@ REST API for an image repository, built for the [Shopify Challenge, Fall 2021](h
 - MongoDB Atlas with Mongoose, AWS S3 Bucket for Image Storage <br/>
 - Swagger UI <br/>
 - Jest, Supertest <br/>
+- Docker <br/>
 
 # Installation (local)
 
@@ -22,6 +23,9 @@ If you'd like to clone this API and use it yourself, you can do so with the foll
 
 1. Clone the project
 2. Install dependencies
+  - 2.1b Alternatively, you can use docker, and not install any dependencies on your local machine:
+    - 2.1b.1 ```docker build -t [image tag] .```
+    - 2.1b.2 ```docker run -p 3000:3000 [image tag]```
 3. Create a [MongoDB Atlas account](https://account.mongodb.com/account/register?nds=true)
 4. Create an [Amazon Web Services account](https://portal.aws.amazon.com/billing/signup#/start)
 5. Create an .env file, and the following variables: 
@@ -49,6 +53,6 @@ If you'd like to clone this API and use it yourself, you can do so with the foll
 
 # Future Features
 
-  - Docker Containerization
+  - ~~Docker Containerization~~
   - CI/CD Pipeline, Automate Testing
   - Host API
