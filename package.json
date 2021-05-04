@@ -31,8 +31,7 @@
     "uuid": "^8.3.2"
   },
   "jest": {
-    "testEnvironment": "node",
-    "globalSetup": "./src/Tests/jest.setup.js"
+    "testEnvironment": "node"
   },
   "devDependencies": {
     "supertest": "^6.1.3"

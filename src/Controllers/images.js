@@ -49,11 +49,13 @@ const CREATE = async (req, res) => {
 
 // GET Callback to Facilitate Retrieving Image(s) Collection 
 const READ = async (req, res) => {
+  if (!req.body.userID) return res.status(400).json({ error: "Missing userID" });
+
   try {
     const { userID } = req.body;
 
     await User.findOne({ _id : userID }).then((currentUser) => {
-      res.status(200).json(currentUser.images);
+      res.status(200).json({ message: currentUser.images });
     });
   } catch (err) {
     return res.status(400).json({ error: err.message });

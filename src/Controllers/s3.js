@@ -43,8 +43,8 @@ const deleteImage = async (req, imageKey) => {
 
   try {
     await s3.headObject(params).promise();
-    await s3.deleteObject(params);
-    
+    const temp = await s3.deleteObject(params).promise();
+
     return true;
   } catch (err) {
     return false;
