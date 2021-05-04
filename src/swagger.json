@@ -25,12 +25,14 @@
           {
             "name": "email",
             "in": "body",
-            "description": "User email"
+            "description": "User email",
+            "example": "johndoe@gmail.com"
           },
           {
             "name": "password",
             "in": "body",
-            "description": "User password"
+            "description": "User password",
+            "example": "password"
           }
         ],
         "produces": [
@@ -41,7 +43,10 @@
             "description": "User created successfully"
           },
           "400": {
-            "description": "User could not be created"
+            "description": "One of: ['User could not be created', 'Email or password input is invalid'] "
+          },
+          "409": {
+            "description": "User already exists"
           }
         }
       }
@@ -56,12 +61,14 @@
           {
             "name": "email",
             "in": "body",
-            "description": "User email"
+            "description": "User email",
+            "example": "johndoe@gmail.com"
           },
           {
             "name": "password",
             "in": "body",
-            "description": "User password"
+            "description": "User password",
+            "example": "password"
           }
         ],
         "produces": [
@@ -72,6 +79,9 @@
             "description": "JWT, Current User Document"
           },
           "400": {
+            "description": "Email or password input is invalid"
+          },
+          "401": {
             "description": "Invalid Credentials"
           }
         }
@@ -87,17 +97,20 @@
           {
             "name": "User ID",
             "in": "body",
-            "description": "User's Unique ID"
+            "description": "User's Unique ID",
+            "example": "608b9c787dc53031f83763a8"
           },
           {
             "name": "Image",
             "in": "body",
-            "description": "Image File User is Uploading"
+            "description": "Image File User is Uploading",
+            "example": "C:/Users/johndoe/Downloads/nodejs.png"
           },
           {
             "name": "JWT",
             "in": "body",
-            "description": "Valid JWT to Authenticate Request"
+            "description": "Valid JWT to Authenticate Request",
+            "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDhiOWM3ODdkYzUzMDMxZjgzNzYzYTgiLCJpYXQiOjE2MjAwOTY3ODcsImV4cCI6MTYyMDE4MzE4N30.6QbspydYaXW8I1zKIsLmg2kYkNF2s4xYir8XhpdyCl4"
           }
         ],
         "produces": [
@@ -105,10 +118,13 @@
         ],
         "responses": {
           "201": {
-            "description": "Image Uploaded Successfully"
+            "description": "Image Uploaded Successfully. image_url: [imageURL], image_key: [imageKey], imageID: [imageID]"
           },
           "400": {
-            "description": "Image Could Not Be Uploaded"
+            "description": "Missing required parameter(s)"
+          },
+          "415": {
+            "description": "Inputted file is not an accepted image type"
           }
         }
       }
@@ -123,12 +139,14 @@
           {
             "name": "User ID",
             "in": "body",
-            "description": "User's Unique ID"
+            "description": "User's Unique ID",
+            "example": "608b9c787dc53031f83763a8"
           },
           {
             "name": "JWT",
             "in": "body",
-            "description": "Valid JWT to Authenticate Request"
+            "description": "Valid JWT to Authenticate Request",
+            "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDhiOWM3ODdkYzUzMDMxZjgzNzYzYTgiLCJpYXQiOjE2MjAwOTY3ODcsImV4cCI6MTYyMDE4MzE4N30.6QbspydYaXW8I1zKIsLmg2kYkNF2s4xYir8XhpdyCl4"
           }
         ],
         "produces": [
@@ -136,10 +154,10 @@
         ],
         "responses": {
           "200": {
-            "description": "Collection of User's Images"
+            "description": "[Collection of User's Images]"
           },
           "400": {
-            "description": "Images Could Not Be Retrieved"
+            "description": "Missing userID"
           }
         }
       }
@@ -154,22 +172,26 @@
           {
             "name": "User ID",
             "in": "body",
-            "description": "User's Unique ID"
+            "description": "User's Unique ID",
+            "example": "608b9c787dc53031f83763a8"
           },
           {
             "name": "Image ID",
             "in": "body",
-            "description": "ID of Specific Image to be Deleted"
+            "description": "ID of Specific Image to be Deleted",
+            "example": "36c549db-6c96-4875-a6a5-6e1e962b6aa6"
           },
           {
             "name": "Image Key",
             "in": "body",
-            "description": "Absolute File URL of Specific Image to Delete"
+            "description": "Absolute File URL of Specific Image to Delete",
+            "example": "36c549db-6c96-4875-a6a5-6e1e962b6aa6_nodejs.png"
           },
           {
             "name": "JWT",
             "in": "body",
-            "description": "Valid JWT to Authenticate Request"
+            "description": "Valid JWT to Authenticate Request",
+            "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDhiOWM3ODdkYzUzMDMxZjgzNzYzYTgiLCJpYXQiOjE2MjAwOTY3ODcsImV4cCI6MTYyMDE4MzE4N30.6QbspydYaXW8I1zKIsLmg2kYkNF2s4xYir8XhpdyCl4"
           }
         ],
         "produces": [
@@ -180,7 +202,10 @@
             "description": "Image deleted successfully"
           },
           "400": {
-            "description": "Image could not be deleted"
+            "description": "Missing required parameter(s)"
+          },
+          "404": {
+            "description": "File does not exist"
           }
         }
       }
